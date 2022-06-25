@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <nav>
         <style>
             ul {
@@ -42,36 +43,37 @@
             }
         </style>
         <ul>
-            <li><a class="active" href="/AddProduct.html">AddProduct</a></li>
+            <li><a  href="/AddProduct.html">AddProduct</a></li>
             <li><a href="/addcat.html">AddCat</a></li>
-            <li><a href="/addshop.html">AddShop</a></li>
+            <li><a class="active" href="/addshop.html">AddShop</a></li>
           
         </ul>
     </nav>
 
-
     <div class="add_product">
         <form action="#">
-            <label for="pname">Product Name<em>&#x2a;</em></label>
-            <input id="pname" name="pname" required="" type="text" />
+            <label for="sname">Shop Name<em>&#x2a;</em></label>
+            <input id="sname" name="sname" required="" type="text" />
 
-            <label for="sid">ShopId<em>&#x2a;</em></label>
-            <input id="sid" name="sid" required="" type="text" />
+            <label for="stype">Shop type<em>&#x2a;</em></label>
+            <input id="stype" name="stype" required="" type="text" />
 
-            <label for="cid">catId</label>
-            <input id="cid" name="cid" type="text" />
+            <label for="simg">Shop img</label>
+            <input id="simg" name="simg" type="text" />
 
-            <label for="scatId">scatId</label>
-            <input id="scatId" name="scatId" type="text" />
+            <label for="sadd">Shop address<em>&#x2a;</em></label>
+            <input id="sadd" name="sadd" required="" type="text" />
 
-            <label for="price">price</label>
-            <input id="price" name="price" type="text" />
+            <label for="soname">Shop OwnerName<em>&#x2a;</em></label>
+            <input id="soname" name="soname" required="" type="text" />
 
-            <label for="img">img</label>
-            <input id="img" name="img" type="text" />
+            <label for="sopno">ShopOwner Contact<em>&#x2a;</em></label>
+            <input id="sopno" name="sopno" required="" type="text" />
 
-            <label for="description">Product Description <em>&#x2a;</em></label>
-            <textarea id="description" name="description" required="" rows="4"></textarea>
+            <label for="gst">GST No.<em>&#x2a;</em></label>
+            <input id="gst" name="gst" required="" type="text" />
+
+           
 
             <button id="submit" type="submit">SUBMIT</button>
         </form>
@@ -80,24 +82,10 @@
 
         $(document).ready(function () {
             $("form").submit(function (event) {
-                // var formData = {
-                //     name: $("#name").val(),
-                //     email: $("#email").val(),
-                //     superheroAlias: $("#superheroAlias").val(),
-                // };
-
-                // $.ajax({
-                //     type: "POST",
-                //     url: "process.php",
-                //     data: formData,
-                //     dataType: "json",
-                //     encode: true,
-                // }).done(function (data) {
-                //     console.log(data);
-                // });
+              
 
                 $.ajax({
-                    url: 'http://localhost:8080/app/api/products/save-product',
+                    url: 'http://localhost:8080/app/api/shop/save-shop',
                     dataType: 'json',
                     type: 'post',
                     contentType: 'application/json',
@@ -106,13 +94,13 @@
                         withCredentials: true
                     },
                     data: JSON.stringify({
-                        "pname": $('#pname').val(),
-                        "description": $('#description').val(),
-                        "img": $('#img').val(),
-                        "price": $('#price').val(),
-                        "scid": parseInt($('#scid').val()),
-                        "sid": parseInt($('#sid').val()),
-                        "cid": parseInt($('#cid').val())
+                        "shop_name": $('#sname').val(),
+                        "shop_img": $('#simg').val(),
+                        "shop_type": $('#stype').val(),
+                        "contact_no": $('#sopno').val(),
+                        "shop_address":$('#sadd').val(),
+                        "gst_no": $('#gst').val(),
+                        "owner_name": ('#soname').val()
                     }),
                     processData: false,
                     success: function (data, textStatus, jQxhr) {

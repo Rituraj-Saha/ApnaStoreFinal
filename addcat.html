@@ -42,36 +42,29 @@
             }
         </style>
         <ul>
-            <li><a class="active" href="/AddProduct.html">AddProduct</a></li>
-            <li><a href="/addcat.html">AddCat</a></li>
+            <li><a href="/AddProduct.html">AddProduct</a></li>
+            <li><a class="active" href="/addcat.html">AddCat</a></li>
             <li><a href="/addshop.html">AddShop</a></li>
           
         </ul>
     </nav>
 
-
     <div class="add_product">
         <form action="#">
-            <label for="pname">Product Name<em>&#x2a;</em></label>
-            <input id="pname" name="pname" required="" type="text" />
+            <label for="cname">Category Name<em>&#x2a;</em></label>
+            <input id="cname" name="cname" required="" type="text" />
 
             <label for="sid">ShopId<em>&#x2a;</em></label>
             <input id="sid" name="sid" required="" type="text" />
 
-            <label for="cid">catId</label>
+            <label for="cid">categoryId</label>
             <input id="cid" name="cid" type="text" />
 
-            <label for="scatId">scatId</label>
-            <input id="scatId" name="scatId" type="text" />
 
-            <label for="price">price</label>
-            <input id="price" name="price" type="text" />
-
-            <label for="img">img</label>
+            <label for="img">category img</label>
             <input id="img" name="img" type="text" />
 
-            <label for="description">Product Description <em>&#x2a;</em></label>
-            <textarea id="description" name="description" required="" rows="4"></textarea>
+           
 
             <button id="submit" type="submit">SUBMIT</button>
         </form>
@@ -97,7 +90,7 @@
                 // });
 
                 $.ajax({
-                    url: 'http://localhost:8080/app/api/products/save-product',
+                    url: 'http://localhost:8989/api/products/save-product',
                     dataType: 'json',
                     type: 'post',
                     contentType: 'application/json',

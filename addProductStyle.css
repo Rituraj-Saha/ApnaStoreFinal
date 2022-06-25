@@ -26,7 +26,8 @@ body {
     padding: 50px 100px;
     border-top: 10px solid #f45702;
     overflow-y: scroll;
-    height: 80%;
+    height: 70%;
+    width: 50%;
 }
 
 label,
