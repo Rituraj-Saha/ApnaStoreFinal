@@ -6,8 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="addProductStyle.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Document</title>
+    <script>
+        $( document ).ready(function() {
+            console.log( "document loaded" );
+        });
+     
+        $( window ).on( "load", function() {
+            console.log( "window loaded" );
+        });
+        </script>
 </head>
 
 <body>
@@ -52,26 +61,26 @@
 
     <div class="add_product">
         <form action="#">
-            <label for="sname">Shop Name<em>&#x2a;</em></label>
-            <input id="sname" name="sname" required="" type="text" />
+            <label for="shop_name">Shop Name<em>&#x2a;</em></label>
+            <input id="shop_name" name="shop_name" required="" type="text" />
 
-            <label for="stype">Shop type<em>&#x2a;</em></label>
-            <input id="stype" name="stype" required="" type="text" />
+            <label for="shop_type">Shop type<em>&#x2a;</em></label>
+            <input id="shop_type" name="shop_type" required="" type="text" />
 
-            <label for="simg">Shop img</label>
-            <input id="simg" name="simg" type="text" />
+            <label for="shop_img">Shop img</label>
+            <input id="shop_img" name="shop_img" type="text" />
 
-            <label for="sadd">Shop address<em>&#x2a;</em></label>
-            <input id="sadd" name="sadd" required="" type="text" />
+            <label for="shop_address">Shop address<em>&#x2a;</em></label>
+            <input id="shop_address" name="shop_address" required="" type="text" />
 
-            <label for="soname">Shop OwnerName<em>&#x2a;</em></label>
-            <input id="soname" name="soname" required="" type="text" />
+            <label for="owner_name">Shop OwnerName<em>&#x2a;</em></label>
+            <input id="owner_name" name="owner_name" required="" type="text" />
 
-            <label for="sopno">ShopOwner Contact<em>&#x2a;</em></label>
-            <input id="sopno" name="sopno" required="" type="text" />
+            <label for="contact_no">ShopOwner Contact<em>&#x2a;</em></label>
+            <input id="contact_no" name="contact_no" required="" type="text" />
 
-            <label for="gst">GST No.<em>&#x2a;</em></label>
-            <input id="gst" name="gst" required="" type="text" />
+            <label for="gst_no">GST No.<em>&#x2a;</em></label>
+            <input id="gst_no" name="gst_no" required="" type="text" />
 
            
 
@@ -79,11 +88,16 @@
         </form>
     </div>
     <script>
-
         $(document).ready(function () {
+            console.log( "ready!" );
             $("form").submit(function (event) {
-              
-
+                console.log( "shop_name"+ $('#shop_name').val(),
+                        "shop_img"+ $('#shop_img').val(),
+                        "shop_type"+ $('#shop_type').val(),
+                        "contact_no"+ $('#contact_no').val(),
+                        "shop_address"+$('#shop_address').val(),
+                        "gst_no"+ $('#gst_no').val(),
+                        "owner_name"+ $('#owner_name').val())
                 $.ajax({
                     url: 'http://localhost:8080/app/api/shop/save-shop',
                     dataType: 'json',
@@ -93,14 +107,15 @@
                     xhrFields: {
                         withCredentials: true
                     },
+                    
                     data: JSON.stringify({
-                        "shop_name": $('#sname').val(),
-                        "shop_img": $('#simg').val(),
-                        "shop_type": $('#stype').val(),
-                        "contact_no": $('#sopno').val(),
-                        "shop_address":$('#sadd').val(),
-                        "gst_no": $('#gst').val(),
-                        "owner_name": ('#soname').val()
+                        "shop_name": $('#shop_name').val(),
+                        "shop_img": $('#shop_img').val(),
+                        "shop_type": $('#shop_type').val(),
+                        "contact_no": $('#contact_no').val(),
+                        "shop_address":$('#shop_address').val(),
+                        "gst_no": $('#gst_no').val(),
+                        "owner_name": $('#owner_name').val()
                     }),
                     processData: false,
                     success: function (data, textStatus, jQxhr) {
@@ -109,6 +124,7 @@
                     error: function (jqXhr, textStatus, errorThrown) {
                         console.log(errorThrown);
                     }
+                
                 });
 
                 event.preventDefault();
