@@ -80,7 +80,7 @@
   color: #FFFFFF;
   text-align: center;
   font-size: 28px;
-  padding: 20px;
+  padding: 10px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
@@ -111,6 +111,25 @@
   opacity: 1;
   right: 0;
 }
+#phone
+{
+   border:solid 1px green;
+   height: 20px;
+   line-height: 20px;
+   vertical-align: middle
+}
+#theButton
+{
+   border: solid 1px green;
+   background-color: #f4511e;
+   color: #FFFFFF;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 15px;
+   height: 22px;
+   line-height: 22px;
+   vertical-align: middle
+}
+
         </style>
         <ul>
             <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
@@ -120,6 +139,31 @@
     </nav>
 
     <div class="add_product">
+
+        <label for="phoneNo"> phone number:</label>
+        <input type="text" id="phone" style="height: 30px; width:180px;" > 
+  <input type="button" value="Next" id="theButton" style="height: 20px; width:80px;">  
+
+  <table id="owners">
+            <thead>
+          <tr>
+            <th>CustomerId</th>
+            <th>Name</th>
+            <th>Phone No</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>rituraj</td>
+            <td>6305957680</td>
+            <td>hyderabad</td>
+          </tr>
+        </tbody>
+        </table>
+        <br/>
+        <br/>
         <table id="owners">
             <thead>
           <tr>
@@ -143,7 +187,7 @@
                 <td>1  </td>
                 <td>1  </td>
                 <td> 120</td>
-                <td><button class="button" >delete</button>
+                <td><input type="button" value="Delete" id="theButton" style="height: 20px; width:80px;">  
                </td>
             </tr>
         </tbody>
