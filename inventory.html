@@ -106,9 +106,27 @@
       
         </table>
         
-       
         
     </div>
+
+    <script>
+     
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:8080/app/api/products/get-product",
+          type: 'GET',
+          dataType: 'json', // added data type
+          success: function(res) {
+              console.log(res.toString());
+              var obj = JSON.parse(res);     
+              console.log("arrey is: "+obj);
+ 
+          }
+        });
+      });
+     
+
+  </script>
     
 </body>
 
