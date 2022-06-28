@@ -9,14 +9,14 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Document</title>
     <script>
-        $( document ).ready(function() {
-            console.log( "document loaded" );
+        $(document).ready(function () {
+            console.log("document loaded");
         });
-     
-        $( window ).on( "load", function() {
-            console.log( "window loaded" );
+
+        $(window).on("load", function () {
+            console.log("window loaded");
         });
-        </script>
+    </script>
 </head>
 
 <body>
@@ -47,183 +47,308 @@
             li a:hover {
                 background-color: #111;
             }
-            .active{
+
+            .active {
                 background-color: rgb(107, 243, 10);
             }
+
             #owners {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
 
-#owners td, #owners th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+            #owners td,
+            #owners th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-#owners tr:nth-child(even){background-color: #f2f2f2;}
+            #owners tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
 
-#owners tr:hover {background-color: #ddd;}
+            #owners tr:hover {
+                background-color: #ddd;
+            }
 
-#owners th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-.button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #f4511e;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 10px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
+            #owners th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+            }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+            .button {
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #f4511e;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 28px;
+                padding: 10px;
+                width: 200px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+            }
 
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
 
-.button:hover span {
-  padding-right: 25px;
-}
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
 
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-#phone
-{
-   border:solid 1px green;
-   height: 20px;
-   line-height: 20px;
-   vertical-align: middle
-}
-#theButton
-{
-   border: solid 1px green;
-   background-color: #f4511e;
-   color: #FFFFFF;
-   font-family: Arial, Helvetica, sans-serif;
-   font-size: 15px;
-   height: 22px;
-   line-height: 22px;
-   vertical-align: middle
-}
+            .button:hover span {
+                padding-right: 25px;
+            }
 
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            #phone {
+                border: solid 1px green;
+                height: 20px;
+                line-height: 20px;
+                vertical-align: middle
+            }
+
+            #theButton {
+                border: solid 1px green;
+                background-color: #f4511e;
+                color: #FFFFFF;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+                height: 22px;
+                line-height: 22px;
+                vertical-align: middle
+            }
         </style>
         <ul>
-            <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
-            <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a></li>
-            <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/billing.html">Billing</a></li>
+            <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
+            <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a></li>
+            <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/billing.html">Billing</a>
+            </li>
         </ul>
     </nav>
 
     <div class="add_product">
 
         <label for="phoneNo"> phone number:</label>
-        <input type="text" id="phone" style="height: 30px; width:180px;" > 
-  <input type="button" value="Next" id="theButton" style="height: 20px; width:80px;">  
+        <input type="text" id="phone" style="height: 30px; width:180px;">
+        <input type="button" value="Next" id="next" style="height: 20px; width:80px;">
 
-  <div>
-    <form action="#">
+        <div>
+            <form action="#">
 
-      <label for="cname">Customer Name<em>&#x2a;</em></label>
-      <input id="cname" name="cname" required="" type="text" />
+                <label for="cname">Customer Name<em>&#x2a;</em></label>
+                <input id="cname" name="cname" required="" type="text" />
 
-      <label for="phno">Phone No<em>&#x2a;</em></label>
-      <input id="phno" name="phno" required="" type="text" />
+                <label for="phno">Phone No<em>&#x2a;</em></label>
+                <input id="phno" name="phno" required="" type="text" />
 
-      <label for="address">Address</label>
-      <input id="address" name="address" type="text" />
+                <label for="address">Address</label>
+                <input id="address" name="address" type="text" />
 
-     
-  </form>
 
-  </div>
+            </form>
 
-  <table id="owners">
-            <thead>
-          <tr>
-            <th>CustomerId</th>
-            <th>Name</th>
-            <th>Phone No</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>rituraj</td>
-            <td>6305957680</td>
-            <td>hyderabad</td>
-          </tr>
-        </tbody>
-        </table>
-        <br/>
-        <br/>
+        </div>
+
         <table id="owners">
             <thead>
-          <tr>
-            <th>ProductId</th>
-            <th>ProductName</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Tax</th>
-            <th>Discount</th>
-            <th>amount</th>
-            <th>delete</th>
-           
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>tomato </td>
-                <td>2 </td>
-                <td>120  </td>
-                <td>1  </td>
-                <td>1  </td>
-                <td> 120</td>
-                <td><input type="button" value="Delete" id="theButton" style="height: 20px; width:80px;">  
-               </td>
-            </tr>
-        </tbody>
-        
-        </table><br/>
-         
+                <tr>
+                    <th>CustomerId</th>
+                    <th>Name</th>
+                    <th>Phone No</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>rituraj</td>
+                    <td>6305957680</td>
+                    <td>hyderabad</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <table id="owners">
+            <thead>
+                <tr>
+                    <th>ProductId</th>
+                    <th>ProductName</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Tax</th>
+                    <th>Discount</th>
+                    <th>amount</th>
+                    <th>delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>tomato </td>
+                    <td>2 </td>
+                    <td>120 </td>
+                    <td>1 </td>
+                    <td>1 </td>
+                    <td> 120</td>
+                    <td><input type="button" value="Delete" id="theButton" style="height: 20px; width:80px;">
+                    </td>
+                </tr>
+            </tbody>
+
+        </table><br />
+
         <label for="pid">Product Id</label>
-        <input type="text" id="pid" style="height: 30px; width:180px;" > 
+        <input type="text" id="pid" style="height: 30px; width:180px;">
         <label for="pid">Quantity</label>
-        <input type="text" id="qnty" style="height: 30px; width:180px;" ><br/>
+        <input type="text" id="qnty" style="height: 30px; width:180px;"><br />
 
 
 
         <button class="button" style="vertical-align:middle"><span>Add</span></button>
         <button class="button" style="vertical-align:middle"><span>Generate bill</span></button>
 
-        
+
     </div>
-    
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("next").submit(function (event) {
+                // var formData = {
+                //     name: $("#name").val(),
+                //     email: $("#email").val(),
+                //     superheroAlias: $("#superheroAlias").val(),
+                // };
+
+                // $.ajax({
+                //     type: "POST",
+                //     url: "process.php",
+                //     data: formData,
+                //     dataType: "json",
+                //     encode: true,
+                // }).done(function (data) {
+                //     console.log(data);
+                // });
+
+                $.ajax({
+                    url: 'http://localhost:8080/app/api/customer/get-customer?id' + $('#phone'),
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function (res) {
+                        console.log(res.toString());
+                        obj = res;
+                        var count = 0;
+                        // console.log("arrey is: "+obj+ obj[5].pid);
+                        // $.each(obj, function (key, value) {
+                        //     var myArr = [];
+                        //     var mkey;
+                        //     $.each(value, function (key, value) {
+                        //         console.log(key + ": " + value);
+                        //         myArr.push(value);
+                        //         mkey = key
+                        //     });
+                        //     myArr.push("")
+                        //     console.log("myArr:" + myArr)
+                        //     myBody.push(myArr)
+
+                        //     $('tbody').append('<tr><td>' + value.pid + '</td><td>' + value.pname + '</td><td>' + value.qnty + '</td>'
+                        //         + '<td>' + value.price + '</td>' + '<td>' + value.tax + '</td>' + '<td>' + value.discount + '</td>' +
+                        //         '<td>' + findAmount(value.price, value.tax, value.discount) + '</td></tr>'
+                        //     )
+                        // });
+
+
+                    }
+                   
+                });
+
+                event.preventDefault();
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var obj;
+
+            var myBody = [];
+            myBody.push(["Product Id", "Product Name", "Quantity", "Price", "Tax", "Discount", "Amount"])
+            $.ajax({
+                url: "http://localhost:8080/app/api/products/get-product",
+                type: 'GET',
+                dataType: 'json', // added data type
+                success: function (res) {
+                    console.log(res.toString());
+                    obj = res;
+                    var count = 0;
+                    // console.log("arrey is: "+obj+ obj[5].pid);
+                    $.each(obj, function (key, value) {
+                        var myArr = [];
+                        var mkey;
+                        $.each(value, function (key, value) {
+                            console.log(key + ": " + value);
+                            myArr.push(value);
+                            mkey = key
+                        });
+                        myArr.push("")
+                        console.log("myArr:" + myArr)
+                        myBody.push(myArr)
+
+                        $('tbody').append('<tr><td>' + value.pid + '</td><td>' + value.pname + '</td><td>' + value.qnty + '</td>'
+                            + '<td>' + value.price + '</td>' + '<td>' + value.tax + '</td>' + '<td>' + value.discount + '</td>' +
+                            '<td>' + findAmount(value.price, value.tax, value.discount) + '</td></tr>'
+                        )
+                    });
+
+
+                }
+            });
+        });
+        function findAmount() {
+            var price = parseInt(arguments[0]);
+            var tax = parseInt(arguments[1]);
+            var discount = parseInt(arguments[2]);
+
+            var afterTax = price + ((price * tax) / 100)
+            console.log("afterTax" + afterTax)
+            var afterDiscount = afterTax - ((price * discount) / 100)
+            console.log("afterDiscount" + afterDiscount)
+            return afterDiscount
+        }
+    </script>
+
 </body>
 
 </html>
