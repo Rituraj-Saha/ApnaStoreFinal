@@ -50,6 +50,67 @@
             .active{
                 background-color: rgb(107, 243, 10);
             }
+            #owners {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#owners td, #owners th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#owners tr:nth-child(even){background-color: #f2f2f2;}
+
+#owners tr:hover {background-color: #ddd;}
+
+#owners th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
         </style>
         <ul>
             <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
@@ -59,32 +120,40 @@
     </nav>
 
     <div class="add_product">
-        <form action="#">
-            <label for="shop_name">Shop Name<em>&#x2a;</em></label>
-            <input id="shop_name" name="shop_name" required="" type="text" />
-
-            <label for="shop_type">Shop type<em>&#x2a;</em></label>
-            <input id="shop_type" name="shop_type" required="" type="text" />
-
-            <label for="shop_img">Shop img</label>
-            <input id="shop_img" name="shop_img" type="text" />
-
-            <label for="shop_address">Shop address<em>&#x2a;</em></label>
-            <input id="shop_address" name="shop_address" required="" type="text" />
-
-            <label for="owner_name">Shop OwnerName<em>&#x2a;</em></label>
-            <input id="owner_name" name="owner_name" required="" type="text" />
-
-            <label for="contact_no">ShopOwner Contact<em>&#x2a;</em></label>
-            <input id="contact_no" name="contact_no" required="" type="text" />
-
-            <label for="gst_no">GST No.<em>&#x2a;</em></label>
-            <input id="gst_no" name="gst_no" required="" type="text" />
-
+        <table id="owners">
+            <thead>
+          <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Tax</th>
+            <th>Discount</th>
+            <th>amount</th>
+            <th>delete</th>
            
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>tomato </td>
+                <td>2 </td>
+                <td>120  </td>
+                <td>1  </td>
+                <td>1  </td>
+                <td> 120</td>
+                <td><button class="button" >delete</button>
+               </td>
+            </tr>
+        </tbody>
+        
+        </table><br/>
 
-            <button id="submit" type="submit">SUBMIT</button>
-        </form>
+        <button class="button" style="vertical-align:middle"><span>Add</span></button>
+        <button class="button" style="vertical-align:middle"><span>Generate bill</span></button>
+
+        
     </div>
     
 </body>
