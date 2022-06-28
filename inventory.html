@@ -2,132 +2,153 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="addProductStyle.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="addProductStyle.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <title>Document</title>
 </head>
 
 <body>
-    <nav>
-        <style>
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #333;
-            }
+  <nav>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-            li {
-                float: left;
-            }
+      li {
+        float: left;
+      }
 
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
 
-            /* Change the link color to #111 (black) on hover */
-            li a:hover {
-                background-color: #111;
-            }
-            .active{
-                background-color: rgb(107, 243, 10);
-            }
-            #owner {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+      /* Change the link color to #111 (black) on hover */
+      li a:hover {
+        background-color: #111;
+      }
 
-#owner td, #owner th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+      .active {
+        background-color: rgb(107, 243, 10);
+      }
 
-#owner tr:nth-child(even){background-color: #f2f2f2;}
+      #owner {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
 
-#owner tr:hover {background-color: #ddd;}
+      #owner td,
+      #owner th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
 
-#owner th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
+      #owner tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #owner tr:hover {
+        background-color: #ddd;
+      }
+
+      #owner th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+      }
+    </style>
+    <ul>
+      <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
+      <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a>
+      </li>
+      <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/billing.html">Billing</a></li>
+
+    </ul>
+  </nav>
 
 
-        </style>
-        <ul>
-            <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
-            <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a></li>
-            <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/billing.html">Billing</a></li>
-          
-        </ul>
-    </nav>
+  <div class="add_product">
+    <table id="owner">
+      <thead>
+        <tr>
+          <th>ProductId</th>
+          <th>ProductName</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Tax</th>
+          <th>Discount</th>
+          <th>amount</th>
+          <th>edit</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr>
+          <td><input type="text" id="pid" name="aname"></td>
+          <td><input type="text" id="pname" name="bname"></td>
+          <td><input type="text" id="qnty" name="cname"></td>
+          <td><input type="text" id="price" name="dname"></td>
+          <td><input type="text" id="tax" name="ename"></td>
+          <td><input type="text" id="discount" name="fname"></td>
+          <td><input type="text" id="amount" name="fname"></td>
+          <td><button class="button">edit</button></td>
+          <td><button class="button">delete</button></td>
+        </tr>
+      </tbody>
 
 
-    <div style="display: block;overflow: auto;height: 500px;width: 500px;">
-        <table id="owner">
-            <thead>
-          <tr>
-            <th>ProductId</th>
-            <th>ProductName</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Tax</th>
-            <th>Discount</th>
-            <th>amount</th>
-            <th>edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" id="aname" name="aname" ></td>
-            <td><input type="text" id="bname" name="bname" ></td>
-            <td><input type="text" id="cname" name="cname" ></td>
-            <td><input type="text" id="dname" name="dname" ></td>
-            <td><input type="text" id="ename" name="ename" ></td>
-            <td><input type="text" id="fname" name="fname" ></td>
-            <td><input type="text" id="gname" name="gname" ></td>
-            <td><button class="button" >edit</button>
-            <button class="button" >delete</button>
-            </td>
-          </tr>
-        </tbody>
-         
-      
-        </table>
-        
-        
-    </div>
+    </table>
 
-    <script>
+
+  </div>
+
+  <script>
+    var obj
+    var myArr
+    $(document).ready(function () {
+      $.ajax({
+        url: "http://localhost:8080/app/api/products/get-product",
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function (res) {
+          console.log(res.toString());
+          obj = res;
+          // console.log("arrey is: "+obj+ obj[5].pid);
+          $.each(obj, function (key, value) {
+            $.each(value, function (key, value) {
+              console.log(key + ": " + value);
+
+              // var aTable = $("#tbody")
+              // var fragTrow = $("<tr>", {
+              // }).appendTo(aTable);
+              // $("<td>", {
+              //   "class": "tdClass"
+              // }).appendTo(fragTrow).html(value);
+            
+
+            });
+          });
      
-      $(document).ready(function () {
-        $.ajax({
-          url: "http://localhost:8080/app/api/products/get-product",
-          type: 'GET',
-          dataType: 'json', // added data type
-          success: function(res) {
-              console.log(res.toString());
-              var obj = JSON.parse(res);     
-              console.log("arrey is: "+obj);
- 
-          }
-        });
+
+        }
       });
-     
-
+    });
+   
   </script>
-    
+
 </body>
 
 </html>
