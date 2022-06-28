@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="addProductStyle.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/htmlson.js@1.0.4/src/htmlson.js"></script>
+
   <title>Document</title>
 </head>
 
@@ -81,6 +84,8 @@
 
 
   <div class="add_product">
+    <table class="example"></table>
+
     <table id="owner">
       <thead>
         <tr>
@@ -91,23 +96,13 @@
           <th>Tax</th>
           <th>Discount</th>
           <th>amount</th>
-          <th>edit</th>
-          <th>delete</th>
+         
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr>
-          <td><input type="text" id="pid" name="aname"></td>
-          <td><input type="text" id="pname" name="bname"></td>
-          <td><input type="text" id="qnty" name="cname"></td>
-          <td><input type="text" id="price" name="dname"></td>
-          <td><input type="text" id="tax" name="ename"></td>
-          <td><input type="text" id="discount" name="fname"></td>
-          <td><input type="text" id="amount" name="fname"></td>
-          <td><button class="button">edit</button></td>
-          <td><button class="button">delete</button></td>
-        </tr>
+      
       </tbody>
+      <div id="dvTable"></div>
 
 
     </table>
@@ -116,9 +111,12 @@
   </div>
 
   <script>
-    var obj
-    var myArr
+
     $(document).ready(function () {
+      var obj;
+
+      var myBody = [];
+      myBody.push(["Product Id", "Product Name", "Quantity", "Price", "Tax", "Discount", "Amount"])
       $.ajax({
         url: "http://localhost:8080/app/api/products/get-product",
         type: 'GET',
@@ -126,27 +124,42 @@
         success: function (res) {
           console.log(res.toString());
           obj = res;
+          var count = 0;
           // console.log("arrey is: "+obj+ obj[5].pid);
           $.each(obj, function (key, value) {
+            var myArr = [];
+            var mkey;
             $.each(value, function (key, value) {
               console.log(key + ": " + value);
-
-              // var aTable = $("#tbody")
-              // var fragTrow = $("<tr>", {
-              // }).appendTo(aTable);
-              // $("<td>", {
-              //   "class": "tdClass"
-              // }).appendTo(fragTrow).html(value);
-            
-
+              myArr.push(value);
+              mkey = key
             });
-          });
-     
+            myArr.push("")
+            console.log("myArr:" + myArr)
+            myBody.push(myArr)
 
+            $('tbody').append('<tr><td>'+value.pid+'</td><td>'+value.pname+'</td><td>'+value.qnty+'</td>'
+            +'<td>'+value.price+'</td>'+'<td>'+value.tax+'</td>'+'<td>'+value.discount+'</td>'+
+            '<td>'+findAmount(value.price,value.tax,value.discount)+'</td></tr>'
+            )
+          });
+
+          
         }
       });
     });
-   
+    function findAmount()
+    {
+      var price = parseInt(arguments[0]);
+      var tax = parseInt(arguments[1]);
+      var discount = parseInt(arguments[2]);
+      
+      var afterTax = price+((price*tax)/100)
+      console.log("afterTax"+afterTax)
+      var afterDiscount = afterTax - ((price*discount)/100)
+      console.log("afterDiscount"+afterDiscount)
+      return afterDiscount
+    }
   </script>
 
 </body>
