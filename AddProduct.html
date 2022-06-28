@@ -55,26 +55,18 @@
             <label for="pname">Product Name<em>&#x2a;</em></label>
             <input id="pname" name="pname" required="" type="text" />
 
-            <label for="sid">ShopId<em>&#x2a;</em></label>
-            <input id="sid" name="sid" required="" type="text" />
-
-            <label for="cid">catId</label>
-            <input id="cid" name="cid" type="text" />
-
-            <label for="scatId">scatId</label>
-            <input id="scatId" name="scatId" type="text" />
+            <label for="qnty">qnty</label>
+            <input id="qnty" name="qnty" type="text" />
 
             <label for="price">price</label>
             <input id="price" name="price" type="text" />
 
-            <label for="qnty">qnty</label>
-            <input id="qnty" name="qnty" type="text" />
+            <label for="tax">Tax</label>
+            <input id="tax" name="tax" type="text" />
 
-            <label for="img">img</label>
-            <input id="img" name="img" type="text" />
 
-            <label for="description">Product Description <em>&#x2a;</em></label>
-            <textarea id="description" name="description" required="" rows="4"></textarea>
+            <label for="discount">Product Discount <em>&#x2a;</em></label>
+            <input id="discount" name="discount" required=""></input>
 
             <button id="submit" type="submit">SUBMIT</button>
         </form>
@@ -110,17 +102,16 @@
                     },
                     data: JSON.stringify({
                         "pname": $('#pname').val(),
-                        "description": $('#description').val(),
-                        "img": $('#img').val(),
+                        "discount": $('#discount').val(),
                         "price": $('#price').val(),
-                        "scid": parseInt($('#scid').val()),
-                        "sid": parseInt($('#sid').val()),
-                        "cid": parseInt($('#cid').val()),
-                        "qnty": $('#qnty').val()
+                        "qnty": $('#qnty').val(),
+                        "tax": $('#tax').val()
                     }),
                     processData: false,
                     success: function (data, textStatus, jQxhr) {
                         $('#response pre').html(JSON.stringify(data));
+                       alert("Data Uploaded");
+                       if(!alert('Data Uploaded!')){window.location.reload();}
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         console.log(errorThrown+" "+textStatus);
