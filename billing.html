@@ -114,7 +114,7 @@
             vertical-align: middle
         }
 
-        #theButton {
+        .theButton {
             border: solid 1px green;
             background-color: #f4511e;
             color: #FFFFFF;
@@ -130,7 +130,7 @@
 <body>
 
     <nav>
-        
+
         <ul>
             <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
             <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a></li>
@@ -143,9 +143,9 @@
 
         <label for="phoneNo"> phone number:</label>
         <input type="text" id="phone" style="height: 30px; width:180px;">
-        <input type="button" value="Next" id="next" style="height: 20px; width:80px;">
+        <input type="button" value="Next" class="theButton" id="nextCustm" style="height: 20px; width:80px;">
 
-        <div>
+        <div id="addCustomForm">
             <form action="#">
 
                 <label for="cname">Customer Name<em>&#x2a;</em></label>
@@ -159,6 +159,7 @@
 
 
             </form>
+            <input type="button" value="ADD" class="theButton" id="add" style="height: 20px; width:80px;">
 
         </div>
 
@@ -171,7 +172,7 @@
                     <th>Address</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="cTbody">
                 <tr>
                     <td>1</td>
                     <td>rituraj</td>
@@ -205,7 +206,7 @@
                     <td>1 </td>
                     <td>1 </td>
                     <td> 120</td>
-                    <td><input type="button" value="Delete" id="theButton" style="height: 20px; width:80px;">
+                    <td><input type="button" value="Delete" class="theButton" style="height: 20px; width:80px;">
                     </td>
                 </tr>
             </tbody>
@@ -228,21 +229,29 @@
     <script>
 
         $(document).ready(function () {
+            $('#addCustomForm').hide()
 
-            $("#next").click(function (event) {
+            $("#nextCustm").click(function (event) {
 
                 $.ajax({
                     url: 'http://localhost:8080/app/api/customer/get-customer?id=' + $('#phone').val(),
                     type: 'GET',
                     dataType: 'json', // added data type
                     success: function (res) {
-                        console.log(res);
                         obj = res;
+
+                        console.log(obj);
+                        $('tbody').append('<tr><td>' + value.pid + '</td><td>' + value.pname + '</td><td>' + value.qnty + '</td>'
+                            + '<td>' + value.price + '</td>' + '<td>' + value.tax + '</td>' + '<td>' + value.discount + '</td>' +
+                            '<td>' + findAmount(value.price, value.tax, value.discount) + '</td></tr>'
+                        )
                         var count = 0;
+                        $('#addCustomForm').hide()
                     },
                     statusCode: {
                         204: function () {
                             console.log("no user")
+                            $('#addCustomForm').show()
                         },
                     }
 
@@ -250,6 +259,41 @@
 
                 event.preventDefault();
             });
+
+            $('#add').on('click', function () {
+                console.log("clicked on add customer");
+                $.ajax({
+                    url: 'http://localhost:8080/app/api/customer/save-customer',
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json',
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    data: JSON.stringify({
+                        "cid": $('#phno').val(),
+                        "address": $('#address').val(),
+                        "cname": $('#cname').val(),
+                        "phn": $('#phno').val(),
+
+                    }),
+                    processData: false,
+                    success: function (data, textStatus, jQxhr) {
+                        $('#response pre').html(JSON.stringify(data));
+                        alert("Data Uploaded");
+                        if (!alert('Data Uploaded!')) { window.location.reload(); }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log(errorThrown + " " + textStatus);
+                    }
+                });
+            });
+            // $('#add').click()(function (event) {
+            //    
+            //     console.log("clicked on add customer")
+
+            // });
 
             var obj;
         });
