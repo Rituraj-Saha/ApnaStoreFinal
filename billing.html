@@ -197,7 +197,7 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="pTbody">
                 <tr>
                     <td>1</td>
                     <td>tomato </td>
@@ -241,9 +241,8 @@
                         obj = res;
 
                         console.log(obj);
-                        $('tbody').append('<tr><td>' + value.pid + '</td><td>' + value.pname + '</td><td>' + value.qnty + '</td>'
-                            + '<td>' + value.price + '</td>' + '<td>' + value.tax + '</td>' + '<td>' + value.discount + '</td>' +
-                            '<td>' + findAmount(value.price, value.tax, value.discount) + '</td></tr>'
+                        $('#cTbody').append('<tr><td>' + obj.cid + '</td><td>' + obj.cname + '</td><td>' + obj.phn + '</td>'
+                            +'<td>' + obj.address + '</td></tr>'
                         )
                         var count = 0;
                         $('#addCustomForm').hide()
