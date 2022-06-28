@@ -53,9 +53,8 @@
         </style>
         <ul>
             <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/AddProduct.html">AddProduct</a></li>
-            <li><a href="http://localhost:8080/inventorysystem/ApnaStoreFinal/addcat.html">AddCat</a></li>
-            <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/addshop.html">AddShop</a></li>
-          
+            <li><a  href="http://localhost:8080/inventorysystem/ApnaStoreFinal/inventory.html">Inventory</a></li>
+            <li><a class="active" href="http://localhost:8080/inventorysystem/ApnaStoreFinal/billing.html">Billing</a></li>
         </ul>
     </nav>
 
@@ -87,53 +86,7 @@
             <button id="submit" type="submit">SUBMIT</button>
         </form>
     </div>
-    <script>
-        $(document).ready(function () {
-            console.log( "ready!" );
-            $("form").submit(function (event) {
-                console.log( "shop_name"+ $('#shop_name').val(),
-                        "shop_img"+ $('#shop_img').val(),
-                        "shop_type"+ $('#shop_type').val(),
-                        "contact_no"+ $('#contact_no').val(),
-                        "shop_address"+$('#shop_address').val(),
-                        "gst_no"+ $('#gst_no').val(),
-                        "owner_name"+ $('#owner_name').val())
-                $.ajax({
-                    url: 'http://localhost:8080/app/api/shop/save-shop',
-                    dataType: 'json',
-                    type: 'post',
-                    contentType: 'application/json',
-                    crossDomain: true,
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    
-                    data: JSON.stringify({
-                        "shop_name": $('#shop_name').val(),
-                        "shop_img": $('#shop_img').val(),
-                        "shop_type": $('#shop_type').val(),
-                        "contact_no": $('#contact_no').val(),
-                        "shop_address":$('#shop_address').val(),
-                        "gst_no": $('#gst_no').val(),
-                        "owner_name": $('#owner_name').val()
-                    }),
-                    processData: false,
-                    success: function (data, textStatus, jQxhr) {
-                        $('#response pre').html(JSON.stringify(data));
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        console.log(errorThrown);
-                    }
-                
-                });
-
-                event.preventDefault();
-            });
-        });
-
-
-
-    </script>
+    
 </body>
 
 </html>
