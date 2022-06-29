@@ -151,9 +151,6 @@
                 <label for="cname">Customer Name<em>&#x2a;</em></label>
                 <input id="cname" name="cname" required="" type="text" />
 
-                <label for="phno">Phone No<em>&#x2a;</em></label>
-                <input id="phno" name="phno" required="" type="text" />
-
                 <label for="address">Address</label>
                 <input id="address" name="address" type="text" />
 
@@ -173,12 +170,7 @@
                 </tr>
             </thead>
             <tbody id="cTbody">
-                <tr>
-                    <td>1</td>
-                    <td>rituraj</td>
-                    <td>6305957680</td>
-                    <td>hyderabad</td>
-                </tr>
+              
             </tbody>
         </table>
         <br />
@@ -193,35 +185,28 @@
                     <th>Tax</th>
                     <th>Discount</th>
                     <th>amount</th>
-                    <th>delete</th>
+
 
                 </tr>
             </thead>
             <tbody id="pTbody">
-                <tr>
-                    <td>1</td>
-                    <td>tomato </td>
-                    <td>2 </td>
-                    <td>120 </td>
-                    <td>1 </td>
-                    <td>1 </td>
-                    <td> 120</td>
-                    <td><input type="button" value="Delete" class="theButton" style="height: 20px; width:80px;">
-                    </td>
-                </tr>
+               
             </tbody>
 
         </table><br />
 
         <label for="pid">Product Id</label>
         <input type="text" id="pid" style="height: 30px; width:180px;">
-        <label for="pid">Quantity</label>
+        <label for="qnty">Quantity</label>
         <input type="text" id="qnty" style="height: 30px; width:180px;"><br />
+        <button class="button" style="vertical-align:middle" id="getP"><span>Add</span></button>
+
+        <p><input type="text" placeholder="Type something..." id="myInput"></p>
+        <div id="result"></div>
 
 
 
-        <button class="button" style="vertical-align:middle"><span>Add</span></button>
-        <button class="button" style="vertical-align:middle"><span>Generate bill</span></button>
+        <button class="button" style="vertical-align:middle" id="genBill"><span>Generate bill</span></button>
 
 
     </div>
@@ -232,26 +217,33 @@
             $('#addCustomForm').hide()
 
             $("#nextCustm").click(function (event) {
-
+                var obj
                 $.ajax({
                     url: 'http://localhost:8080/app/api/customer/get-customer?id=' + $('#phone').val(),
+
                     type: 'GET',
                     dataType: 'json', // added data type
                     success: function (res) {
-                        obj = res;
-
-                        console.log(obj);
-                        $('#cTbody').append('<tr><td>' + obj.cid + '</td><td>' + obj.cname + '</td><td>' + obj.phn + '</td>'
-                            +'<td>' + obj.address + '</td></tr>'
-                        )
-                        var count = 0;
-                        $('#addCustomForm').hide()
+                        obj = res
+                    },
+                    complete: function (xhr, textStatus) {
+                        console.log(xhr.status);
                     },
                     statusCode: {
                         204: function () {
                             console.log("no user")
                             $('#addCustomForm').show()
                         },
+                        200: function () {
+
+                            console.log("http://localhost:8080/app/api/customer/get-customer?id=" + $('#phone').val())
+                            //console.log(obj);
+                            $('#cTbody').append('<tr><td>' + obj.cid + '</td><td>' + obj.cname + '</td><td>' + obj.phn + '</td>'
+                                + '<td>' + obj.address + '</td></tr>'
+                            )
+                            var count = 0;
+                            $('#addCustomForm').hide()
+                        }
                     }
 
                 });
@@ -271,10 +263,10 @@
                         withCredentials: true
                     },
                     data: JSON.stringify({
-                        "cid": $('#phno').val(),
+                        "cid": $('#phone').val(),
                         "address": $('#address').val(),
                         "cname": $('#cname').val(),
-                        "phn": $('#phno').val(),
+                        "phn": $('#phone').val(),
 
                     }),
                     processData: false,
@@ -294,9 +286,218 @@
 
             // });
 
-            var obj;
-        });
+            var typingTimer;                //timer identifier
+            var doneTypingInterval = 3000;  //time in ms, 5 second for example
+            var $input = $('#myInput');
+            var results = "";
+            //on keyup, start the countdown
+            $input.on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            });
 
+            //on keydown, clear the countdown 
+            $input.on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+
+            //user is "finished typing," do something
+            function doneTyping() {
+                var textWatch
+                $.ajax({
+                    url: 'http://localhost:8080/app/api/products/get-productbyName?pname=' + $input.val(),
+
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function (res) {
+                        textWatch = res
+                        console.log("in success");
+                        console.log(res);
+
+                        $.each(res, function (key, value) {
+                            var myArr = [];
+                            var mkey;
+                            $.each(value, function (key, value) {
+                                console.log(key + ": " + value);
+                                // myArr.push(value);
+                                // mkey = key
+
+                            });
+                            results = results + " " + value.pid + " " + value.pname
+
+                            $("#result").text(results);
+                            // myArr.push("")
+                            // console.log("myArr:" + myArr)
+                            // myBody.push(myArr)
+                        });
+                    },
+                    complete: function (xhr, textStatus) {
+                        console.log(xhr.status + textStatus);
+
+                    },
+                    statusCode: {
+
+                        200: function () {
+
+
+                        }
+                    }
+
+                });
+
+            }
+
+
+
+
+            // $("#myInput").on("input", function () {
+            //     // Print entered value in a div box
+            //     //  $("#result").text($(this).val());
+            //     });
+
+
+            $('#getP').click(function (event) {
+                $.ajax({
+                    url: 'http://localhost:8080/app/api/products/get-productbyId?id=' + $('#pid').val(),
+
+                    type: 'GET',
+                    dataType: 'json', // added data type
+                    success: function (res) {
+                        obj = res
+                    },
+                    complete: function (xhr, textStatus) {
+                        console.log(xhr.status);
+                    },
+                    statusCode: {
+                        204: function () {
+                            console.log("no user")
+                            alert("No Data for this PID");
+                        },
+                        200: function () {
+
+                            console.log("http://localhost:8080/app/api/products/get-productbyId?id=" + $('#pid').val())
+                            //console.log(obj);
+                            $('#pTbody').append('<tr><td>' + obj.pid + '</td><td>' + obj.pname + '</td><td>' + $('#qnty').val() + '</td>'
+                                + '<td>' + obj.price + '</td>' + '<td>' + obj.tax + '</td>' + '<td>' + obj.discount + '</td>' +
+                                '<td>' + findAmount(obj.price, obj.tax, obj.discount) + '</td></tr>'
+                            )
+                            var count = 0;
+                            $('#addCustomForm').hide()
+                        }
+                    }
+
+                });
+            })
+
+            $('#genBill').click(function(event){
+                
+                genBill()
+                event.preventDefault();
+            })
+
+
+        });
+        function findAmount() {
+            var price = parseInt(arguments[0]);
+            var tax = parseInt(arguments[1]);
+            var discount = parseInt(arguments[2]);
+
+            var afterTax = price + ((price * tax) / 100)
+            console.log("afterTax" + afterTax)
+            var afterDiscount = afterTax - ((price * discount) / 100)
+            console.log("afterDiscount" + afterDiscount)
+            return afterDiscount
+        }
+        function genBill() {
+            console.log("looping in tbody");
+            var details = ""
+            var id
+                var qnty=""
+            $('#pTbody  > tr >td').each(function (index,td) {
+                // console.log(index);
+                // console.log(td);
+                
+                $(td).each(function(index2,data)
+                {
+                   // console.log(index2);
+                   
+                   if(index  == 0 || index%7 ==0)  
+                   {
+                    //console.log($(data).html());
+                        id = $(data).html()
+                   }
+                   if(index%7 ==2)  
+                   {
+                        //console.log($(data).html());
+                        qnty=$(data).html()
+                   }
+                
+                })
+
+                if(index%7==6){
+                    console.log("id is "+id+" qnty is "+qnty);
+                   
+                   $.ajax({
+                   url: 'http://localhost:8080/app/api/products/bill-forproduct',
+                   dataType: 'json',
+                   type: 'post',
+                   contentType: 'application/json',
+                   crossDomain: true,
+                   xhrFields: {
+                       withCredentials: true
+                   },
+                   data: JSON.stringify({
+                       "qnty":qnty,
+                       "id":id,
+                   }),
+                   processData: false,
+                   success: function (data, textStatus, jQxhr) {
+                       // $('#response pre').html(JSON.stringify(data));
+                       // alert("Data Uploaded");
+                       // if (!alert('Data Uploaded!')) { window.location.reload(); }
+                       
+                    details = details+td.html()
+                    console.log("added")
+                       
+                   },
+                   error: function (jqXhr, textStatus, errorThrown) {
+                      // console.log(errorThrown + " " + textStatus);
+                   }
+                });
+                // $.ajax({
+                //    url: 'http://localhost:8080/app/api/products/bill-forproduct',
+                //    dataType: 'json',
+                //    type: 'post',
+                //    contentType: 'application/json',
+                //    crossDomain: true,
+                //    xhrFields: {
+                //        withCredentials: true
+                //    },
+                //    data: JSON.stringify({
+                //        "qnty":qnty,
+                //        "id":id,
+                //    }),
+                //    processData: false,
+                //    success: function (data, textStatus, jQxhr) {
+                //        // $('#response pre').html(JSON.stringify(data));
+                //        // alert("Data Uploaded");
+                //        // if (!alert('Data Uploaded!')) { window.location.reload(); }
+                //        if(data=="success")
+                //        {
+                //            console.log(added)
+                //        }
+                //    },
+                //    error: function (jqXhr, textStatus, errorThrown) {
+                //       // console.log(errorThrown + " " + textStatus);
+                //    }
+                // });
+
+                }
+              
+            });
+
+            
+        }
     </script>
 
 </body>
