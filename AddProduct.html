@@ -2,17 +2,20 @@
 <html lang="en">
 
 <head>
+<title>Apna Store</title>
+<h1 >APNA STORE</h1>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="addProductStyle.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Document</title>
+    
 </head>
 
 <body>
     <nav>
         <style>
+
             ul {
                 list-style-type: none;
                 margin: 0;
@@ -53,20 +56,26 @@
     <div class="add_product">
         <form action="#">
             <label for="pname">Product Name<em>&#x2a;</em></label>
-            <input id="pname" name="pname" required="" type="text" />
+            <input id="pname" name="pname" required="" type="text"placeholder="Enter the Proudct Name" />
 
-            <label for="qnty">Total Unit</label>
-            <input id="qnty" name="qnty" type="text" />
+         
+		<label for="qnty">Quantity(Total Available Units)
+	
 
-            <label for="price">Price</label>
-            <input id="price" name="price" type="text" />
+</option>
+</label>
+		
+            <input id="qnty" name="qnty" type="text"placeholder="Enter the Qunatity" /> 
 
-            <label for="tax">Tax</label>
-            <input id="tax" name="tax" type="text" />
+            <label for="price">Price(₹)</label>
+            <input id="price" name="price" type="text" placeholder="Enter the Price(₹)" />
+
+            <label for="tax">Tax(%)</label>
+            <input id="tax" name="tax" type="text"placeholder="Enter the Tax Percentage" />
 
 
-            <label for="discount">Product Discount <em>&#x2a;</em></label>
-            <input id="discount" name="discount" required=""></input>
+            <label for="discount">Product Discount(%)<em>&#x2a;</em></label>
+            <input id="discount" name="discount" required="" placeholder="Enter the Product Discount"></input>
 
             <button id="submit" type="submit">SUBMIT</button>
         </form>
