@@ -170,7 +170,7 @@
                 </tr>
             </thead>
             <tbody id="cTbody">
-              
+
             </tbody>
         </table>
         <br />
@@ -190,7 +190,7 @@
                 </tr>
             </thead>
             <tbody id="pTbody">
-               
+
             </tbody>
 
         </table><br />
@@ -389,8 +389,8 @@
                 });
             })
 
-            $('#genBill').click(function(event){
-                
+            $('#genBill').click(function (event) {
+
                 genBill()
                 event.preventDefault();
             })
@@ -412,91 +412,119 @@
             console.log("looping in tbody");
             var details = ""
             var id
-                var qnty=""
-            $('#pTbody  > tr >td').each(function (index,td) {
+            var qnty = ""
+            $('#pTbody  > tr >td').each(function (index, td) {
                 // console.log(index);
                 // console.log(td);
-                
-                $(td).each(function(index2,data)
-                {
-                   // console.log(index2);
-                   
-                   if(index  == 0 || index%7 ==0)  
-                   {
-                    //console.log($(data).html());
-                        id = $(data).html()
-                   }
-                   if(index%7 ==2)  
-                   {
+
+                $(td).each(function (index2, data) {
+                    // console.log(index2);
+
+                    if (index == 0 || index % 7 == 0) {
                         //console.log($(data).html());
-                        qnty=$(data).html()
-                   }
-                
+                        id = $(data).html()
+                    }
+                    if (index % 7 == 2) {
+                        //console.log($(data).html());
+                        qnty = $(data).html()
+                    }
+
                 })
 
-                if(index%7==6){
-                    console.log("id is "+id+" qnty is "+qnty);
-                   
-                   $.ajax({
-                   url: 'http://localhost:8080/app/api/products/bill-forproduct',
-                   dataType: 'json',
-                   type: 'post',
-                   contentType: 'application/json',
-                   crossDomain: true,
-                   xhrFields: {
-                       withCredentials: true
-                   },
-                   data: JSON.stringify({
-                       "qnty":qnty,
-                       "id":id,
-                   }),
-                   processData: false,
-                   success: function (data, textStatus, jQxhr) {
-                       // $('#response pre').html(JSON.stringify(data));
-                       // alert("Data Uploaded");
-                       // if (!alert('Data Uploaded!')) { window.location.reload(); }
-                       
-                    details = details+td.html()
-                    console.log("added")
-                       
-                   },
-                   error: function (jqXhr, textStatus, errorThrown) {
-                      // console.log(errorThrown + " " + textStatus);
-                   }
-                });
-                // $.ajax({
-                //    url: 'http://localhost:8080/app/api/products/bill-forproduct',
-                //    dataType: 'json',
-                //    type: 'post',
-                //    contentType: 'application/json',
-                //    crossDomain: true,
-                //    xhrFields: {
-                //        withCredentials: true
-                //    },
-                //    data: JSON.stringify({
-                //        "qnty":qnty,
-                //        "id":id,
-                //    }),
-                //    processData: false,
-                //    success: function (data, textStatus, jQxhr) {
-                //        // $('#response pre').html(JSON.stringify(data));
-                //        // alert("Data Uploaded");
-                //        // if (!alert('Data Uploaded!')) { window.location.reload(); }
-                //        if(data=="success")
-                //        {
-                //            console.log(added)
-                //        }
-                //    },
-                //    error: function (jqXhr, textStatus, errorThrown) {
-                //       // console.log(errorThrown + " " + textStatus);
-                //    }
-                // });
+                if (index % 7 == 6) {
+                    console.log("id is " + id + " qnty is " + qnty);
+
+                    $.ajax({
+                        url: 'http://localhost:8080/app/api/products/bill-forproduct',
+                        dataType: 'json',
+                        type: 'post',
+                        contentType: 'application/json',
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        data: JSON.stringify({
+                            "qnty": qnty,
+                            "id": id,
+                        }),
+                        processData: false,
+                        success: function (data, textStatus, jQxhr) {
+                            // $('#response pre').html(JSON.stringify(data));
+                            // alert("Data Uploaded");
+                            // if (!alert('Data Uploaded!')) { window.location.reload(); }
+
+
+
+
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            // console.log(errorThrown + " " + textStatus);
+                        }
+                    });
+                    // $.ajax({
+                    //    url: 'http://localhost:8080/app/api/products/bill-forproduct',
+                    //    dataType: 'json',
+                    //    type: 'post',
+                    //    contentType: 'application/json',
+                    //    crossDomain: true,
+                    //    xhrFields: {
+                    //        withCredentials: true
+                    //    },
+                    //    data: JSON.stringify({
+                    //        "qnty":qnty,
+                    //        "id":id,
+                    //    }),
+                    //    processData: false,
+                    //    success: function (data, textStatus, jQxhr) {
+                    //        // $('#response pre').html(JSON.stringify(data));
+                    //        // alert("Data Uploaded");
+                    //        // if (!alert('Data Uploaded!')) { window.location.reload(); }
+                    //        if(data=="success")
+                    //        {
+                    //            console.log(added)
+                    //        }
+                    //    },
+                    //    error: function (jqXhr, textStatus, errorThrown) {
+                    //       // console.log(errorThrown + " " + textStatus);
+                    //    }
+                    // });
 
                 }
-              
+                details = details + $(td).html() + "--"
+                console.log(details)
+                if (index % 7 == 0) {
+                    details = "\n"
+                    console.log(details)
+                }
+            });
+            $.ajax({
+                url: 'http://localhost:8080/app/api/invoice/generate',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: JSON.stringify({
+                    "customer_id":$('#phone').val(),
+                    "date": new Date($.now()),
+                    "details": details
+                }),
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    // $('#response pre').html(JSON.stringify(data));
+                    // alert("Data Uploaded");
+                    // if (!alert('Data Uploaded!')) { window.location.reload(); }
+                    alert("Invoice added")
+                    if(!alert('Data Uploaded!')){window.location.reload();}
+
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    // console.log(errorThrown + " " + textStatus);
+                }
             });
 
-            
         }
     </script>
 
